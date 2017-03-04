@@ -8,8 +8,16 @@
 #--------------------------------------------------------------------------------------------------
 set -e  # Fail on first error
 
-# Define $LOG_PATH in your script to log to a file, otherwise
+# LOG_PATH - Define $LOG_PATH in your script to log to a file, otherwise
 # just writes to STDOUT.
+
+# LOG_LEVEL_STDOUT - Define to determine above which level goes to STDOUT.
+# By default, all log levels will be written to STDOUT.
+LOG_LEVEL_STDOUT="INFO"
+
+# LOG_LEVEL_LOG - Define to determine which level goes to LOG_PATH.
+# By default all log levels will be written to LOG_PATH.
+LOG_LEVEL_LOG="INFO"
 
 # Useful global variables that users may wish to reference
 SCRIPT_ARGS="$@"
@@ -42,8 +50,15 @@ else
     readonly LOG_INFO_COLOR=$(tput sgr 0)
     readonly LOG_SUCCESS_COLOR=$(tput setaf 2)
     readonly LOG_WARN_COLOR=$(tput setaf 3)
-    readonly LOG_DEBUG_COLOR="\033[1;34m"
+    readonly LOG_DEBUG_COLOR=$(tput setaf 4)
 fi
+
+# Levels for comparing against LOG_LEVEL_STDOUT and LOG_LEVEL_LOG
+readonly LOG_LEVEL_INFO=0
+readonly LOG_LEVEL_SUCCESS=1
+readonly LOG_LEVEL_WARNING=2
+readonly LOG_LEVEL_ERROR=3
+readonly LOG_LEVEL_DEBUG=4
 
 # This function scrubs the output of any control characters used in colorized output
 # It's designed to be piped through with text that needs scrubbing.  The scrubbed
@@ -62,11 +77,21 @@ log() {
     [ -z ${log_level} ] && log_level="INFO";
     [ -z ${log_color} ] && log_color="${LOG_INFO_COLOR}";
 
-    # STDOUT
-    printf "${log_color}[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text} ${LOG_DEFAULT_COLOR}\n";
-    # LOG_PATH minus fancypants colors
-    if [ ! -z $LOG_PATH ]; then
-        printf "[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text}\n" >> $LOG_PATH;
+    # Check LOG_LEVEL_STDOUT to see if this level of entry goes to STDOUT.
+    # XXX This is the horror that happens when your language doesn't have a hash data struct.
+    eval log_level_int="\$LOG_LEVEL_${log_level}";
+    eval log_level_stdout="\$LOG_LEVEL_${LOG_LEVEL_STDOUT}"
+    if [ $log_level_stdout -le $log_level_int ]; then
+        # STDOUT
+        printf "${log_color}[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text} ${LOG_DEFAULT_COLOR}\n";
+    fi
+    eval log_level_log="\$LOG_LEVEL_${LOG_LEVEL_LOG}"
+    # Check LOG_LEVEL_LOG to see if this level of entry goes to FILE_PATH
+    if [ $log_level_log -le $log_level_int ]; then
+        # LOG_PATH minus fancypants colors
+        if [ ! -z $LOG_PATH ]; then
+            printf "[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text}\n" >> $LOG_PATH;
+        fi
     fi
 
     return 0;
