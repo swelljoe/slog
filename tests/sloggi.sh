@@ -48,3 +48,4 @@ else
     echo "not ok 8 - No log file was created."
 fi
 
+log_debug "Uh oh. This should never show up in the log or the console."
