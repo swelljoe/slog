@@ -86,7 +86,7 @@ log() {
         printf "${log_color}[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text} ${LOG_DEFAULT_COLOR}\n";
     fi
     eval log_level_log="\$LOG_LEVEL_${LOG_LEVEL_LOG}"
-    # Check LOG_LEVEL_LOG to see if this level of entry goes to FILE_PATH
+    # Check LOG_LEVEL_LOG to see if this level of entry goes to LOG_PATH
     if [ $log_level_log -le $log_level_int ]; then
         # LOG_PATH minus fancypants colors
         if [ ! -z $LOG_PATH ]; then
