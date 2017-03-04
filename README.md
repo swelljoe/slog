@@ -43,7 +43,7 @@ Source slog.sh using '.' (using 'source' is a bashism, and will not work on othe
 
 ### Colorized Output
 
-[Screenshot of slog with colors](http://i.imgur.com/mcEXscp.png)
+![Screenshot of slog with colors](http://i.imgur.com/mcEXscp.png)
 
 ### Logging Levels
 
