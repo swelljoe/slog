@@ -20,6 +20,8 @@ Joe Cooper - Ported to POSIX shell, switched to tput for colors, removed speak a
 
 Set the LOG_PATH variable, if you would like output written to a file. This file will be created if it does not exist, and appended to, if it does exist.
 
+Optionally set the LOG_LEVEL_STDOUT and/or LOG_LEVEL_LOG variables. These variables determine the minimum severity of the log entry to write to each output. e.g. Setting these variables to "WARNING" would cause only errors of level "WARNING" or "ERROR" to be written. The acceptable values, in order of severity, goes, from lowest to highest severity: DEBUG, INFO, SUCCESS, WARNING, ERROR.
+
 Import slog.sh using '.' (using 'source' is a bashism, and will not work on other shells).
 
 ``` bash
@@ -52,21 +54,41 @@ slog uses tput to produce colorized output. It uses colors 1, 2, and 3, which co
 
 * **log_info**
 
-    Prints an "INFO" level message to stdout with the timestamp of the occurrence.
+    Prints an "INFO" level message to stdout and/or file with the timestamp of the occurrence.
 
 * **log_warning**
 
-    Prints a "WARNING" level message to stdout with the timestamp of the occurrence.
+    Prints a "WARNING" level message to stdout and/or file with the timestamp of the occurrence.
 
 * **log_success**
 
-    Prints a "SUCCESS" level message to stdout with the timestamp of the occurrence.
+    Prints a "SUCCESS" level message to stdout and/or file with the timestamp of the occurrence.
 
 * **log_error**
 
-    Prints an "ERROR" level message to stdout with the timestamp of the occurrence.
+    Prints an "ERROR" level message to stdout and/or file with the timestamp of the occurrence.
 
-### Other Useful Tidbits
+* **log_debug**
+
+    Prints a "DEBUG" level message to stdout and/or file with the timestamp of the occurrence. Disabled, by default.
+
+### Logging Options
+
+Logging options can be configured anywhere within your script, and can be changed at any point. Obviously, the settings will only apply to log function calls that happen after you have defined them. Usually, you'd want to define them at the beginning of your main script, and never change them.
+
+* **LOG_PATH**
+
+    Set this variable in order to write log entries to a log file. By default, entries will be printed to STDOUT.
+    
+* **LOG_LEVEL_STDOUT**
+
+    Set this variable in order to determine what severity events to write to STDOUT. The default minimum level is "INFO".
+    
+* **LOG_LEVEL_LOG**
+
+    Set this variable in order to determine what several events to write to the log file (set in LOG_PATH). The default minimmum level of "INFO".
+    
+### Other Useful Values
 
 * **SCRIPT_ARGS**
 
