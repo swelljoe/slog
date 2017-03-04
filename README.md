@@ -43,6 +43,8 @@ Source slog.sh using '.' (using 'source' is a bashism, and will not work on othe
 
 ### Colorized Output
 
+slog uses tput to produce colorized output. It uses colors 1, 2, and 3, which coincides with red, green, and yellow in many shell pallettes (but not all, by any means). These are used for log_error, log_warning, and log_success, respectively. Color will be disabled for non-interactive terminals (so if being piped into a file). If a LOG_PATH is defined, the log will containt no color information, either.
+
 ![Screenshot of slog with colors](http://i.imgur.com/mcEXscp.png)
 
 ### Logging Levels
@@ -67,7 +69,7 @@ Source slog.sh using '.' (using 'source' is a bashism, and will not work on othe
 
 * **SCRIPT_ARGS**
 
-    A global array of all the arguments used to create run your script
+    A global array of all the arguments used to run your script
 
 * **SCRIPT_NAME**
 
@@ -77,6 +79,6 @@ Source slog.sh using '.' (using 'source' is a bashism, and will not work on othe
 
     The script's base directory which is not always the current working directory.
 
-### More to Come
+### Problems?
 
-    Please add any feature requests to a ticket for this project.
+Open a ticket if you run into any problems. Patches are welcome (as long as you keep it simple and compatibile with all the shells), and I especially hope folks will report compatitibility issues with POSIX (and close to POSIX) shells. I'm working on tools that target many Linux distributions and BSDs, so I like to know when my shell scripts are going to act funny.
