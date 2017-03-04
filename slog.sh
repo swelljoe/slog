@@ -77,6 +77,26 @@ log() {
     [ -z ${log_level} ] && log_level="INFO";
     [ -z ${log_color} ] && log_color="${LOG_INFO_COLOR}";
 
+    # Validate LOG_LEVEL_STDOUT and LOG_LEVEL_LOG since they'll be eval-ed.
+    case $LOG_LEVEL_STDOUT in
+        DEBUG|INFO|SUCCESS|WARNING|ERROR)
+            break
+            ;;
+        *)
+            LOG_LEVEL_STDOUT=INFO
+            break
+            ;;
+    esac
+    case $LOG_LEVEL_LOG in
+        DEBUG|INFO|SUCCESS|WARNING|ERROR)
+            break
+            ;;
+        *)
+            LOG_LEVEL_STDOUT=INFO
+            break
+            ;;
+    esac
+
     # Check LOG_LEVEL_STDOUT to see if this level of entry goes to STDOUT.
     # XXX This is the horror that happens when your language doesn't have a hash data struct.
     eval log_level_int="\$LOG_LEVEL_${log_level}";

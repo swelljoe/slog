@@ -49,3 +49,7 @@ else
 fi
 
 log_debug "Uh oh. This should never show up in the log or the console."
+
+# Invalid log level...should default to info
+LOG_LEVEL_STDOUT="DOOTDOOT"
+log_info "ok 9 - This should show up, even though LOG_LEVEL_STDOUT set to $LOG_LEVEL_STDOUT."
