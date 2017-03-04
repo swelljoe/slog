@@ -43,7 +43,7 @@ Source slog.sh using '.' (using 'source' is a bashism, and will not work on othe
 
 ### Colorized Output
 
-slog uses tput to produce colorized output. It uses colors 1, 2, and 3, which coincides with red, green, and yellow in many shell pallettes (but not all, by any means). These are used for log_error, log_warning, and log_success, respectively. Color will be disabled for non-interactive terminals (so if being piped into a file). If a LOG_PATH is defined, the log will containt no color information, either.
+slog uses tput to produce colorized output. It uses colors 1, 2, and 3, which coincides with red, green, and yellow in many shell pallettes (but not all, by any means). These are used for log_error, log_warning, and log_success, respectively. Color will be disabled for non-interactive terminals (so if being piped into a file). If a LOG_PATH is defined, the log will contain no color information, either.
 
 ![Screenshot of slog with colors](http://i.imgur.com/mcEXscp.png)
 
