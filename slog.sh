@@ -54,11 +54,11 @@ else
 fi
 
 # Levels for comparing against LOG_LEVEL_STDOUT and LOG_LEVEL_LOG
-readonly LOG_LEVEL_INFO=0
-readonly LOG_LEVEL_SUCCESS=1
-readonly LOG_LEVEL_WARNING=2
-readonly LOG_LEVEL_ERROR=3
-readonly LOG_LEVEL_DEBUG=4
+readonly LOG_LEVEL_DEBUG=0
+readonly LOG_LEVEL_INFO=1
+readonly LOG_LEVEL_SUCCESS=2
+readonly LOG_LEVEL_WARNING=3
+readonly LOG_LEVEL_ERROR=4
 
 # This function scrubs the output of any control characters used in colorized output
 # It's designed to be piped through with text that needs scrubbing.  The scrubbed
