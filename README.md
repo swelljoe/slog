@@ -1,6 +1,6 @@
 # slog
 
-POSIX compatible logging library for bash, dash and others
+POSIX compatible logging library for bash, dash, zsh, and others
 
 slog is a fork of [Fred Palmer's log4bash](https://github.com/fredpalmer/log4bash/blob/master/README.md). log4bash is very nice, but requires bash, and also includes some macOS-isms that I didn't need. So, I ported it to run correctly under bash, dash, and zsh. I also needed logging to both STDOUT and a file, without needing to tee, or whatever. So, this does that, too. slog is under the same fun license as log4bash.
 
@@ -20,12 +20,13 @@ Joe Cooper - Ported to POSIX shell, switched to tput for colors, removed speak a
 
 Set the LOG_PATH variable, if you would like output written to a file. This file will be created if it does not exist, and appended to, if it does exist.
 
-Source slog.sh using '.' (using 'source' is a bashism, and will not work on other shells).
+Import slog.sh using '.' (using 'source' is a bashism, and will not work on other shells).
 
 ``` bash
 
     #!/bin/sh
     
+    # Set LOG_PATH, if you also want output written to a file
     LOG_PATH=./my.log
     . ./slog.sh
 
