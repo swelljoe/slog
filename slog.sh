@@ -92,7 +92,7 @@ log() {
             break
             ;;
         *)
-            LOG_LEVEL_STDOUT=INFO
+            LOG_LEVEL_LOG=INFO
             break
             ;;
     esac
