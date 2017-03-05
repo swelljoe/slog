@@ -28,9 +28,9 @@ SCRIPT_BASE_DIR="$(cd "$( dirname "$0")" && pwd )"
 
 # Determines if we print colors or not
 if [ $(tty -s) ]; then
-	readonly INTERACTIVE_MODE="off"
+    readonly INTERACTIVE_MODE="off"
 else
-	readonly INTERACTIVE_MODE="on"
+    readonly INTERACTIVE_MODE="on"
 fi
 
 #--------------------------------------------------------------------------------------------------
