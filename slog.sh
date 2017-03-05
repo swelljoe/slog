@@ -1,10 +1,10 @@
 #!/bin/sh
 #--------------------------------------------------------------------------------------------------
-# log4sh - Makes logging in POSIX shell scripting suck less
+# slog - Makes logging in POSIX shell scripting suck less
 # Copyright (c) Fred Palmer
 # POSIX version Copyright Joe Cooper
 # Licensed under the MIT license
-# http://github.com/swelljoe/log4sh
+# http://github.com/swelljoe/slog
 #--------------------------------------------------------------------------------------------------
 set -e  # Fail on first error
 
