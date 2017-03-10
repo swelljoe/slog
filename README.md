@@ -18,20 +18,20 @@ Joe Cooper - Ported to POSIX shell, switched to tput for colors, removed speak a
 
 ## Using slog
 
+Import slog.sh using '.' (using 'source' is a bashism, and will not work on other shells).
+
 Set the LOG_PATH variable, if you would like output written to a file. This file will be created if it does not exist, and appended to, if it does exist.
 
 Optionally set the LOG_LEVEL_STDOUT and/or LOG_LEVEL_LOG variables. These variables determine the minimum severity of the log entry to write to each output. e.g. Setting these variables to "WARNING" would cause only errors of level "WARNING" or "ERROR" to be written. The acceptable values, in order of severity, goes, from lowest to highest severity: DEBUG, INFO, SUCCESS, WARNING, ERROR.
-
-Import slog.sh using '.' (using 'source' is a bashism, and will not work on other shells).
 
 ``` bash
 
     #!/bin/sh
     
+    . ./slog.sh
     # Set LOG_PATH, if you also want output written to a file
     LOG_PATH=./my.log
-    . ./slog.sh
-
+    
     log "This is regular log message... log and log_info do the same thing";
 
     log_warning "Luke ... you turned off your targeting computer";
