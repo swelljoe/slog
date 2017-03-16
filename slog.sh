@@ -37,19 +37,19 @@ fi
 if [ "${INTERACTIVE_MODE}" = "off" ]
 then
     # Then we don't care about log colors
-    readonly LOG_DEFAULT_COLOR=""
-    readonly LOG_ERROR_COLOR=""
-    readonly LOG_INFO_COLOR=""
-    readonly LOG_SUCCESS_COLOR=""
-    readonly LOG_WARN_COLOR=""
-    readonly LOG_DEBUG_COLOR=""
+    LOG_DEFAULT_COLOR=""
+    LOG_ERROR_COLOR=""
+    LOG_INFO_COLOR=""
+    LOG_SUCCESS_COLOR=""
+    LOG_WARN_COLOR=""
+    LOG_DEBUG_COLOR=""
 else
-    readonly LOG_DEFAULT_COLOR=$(tput sgr0)
-    readonly LOG_ERROR_COLOR=$(tput setaf 1)
-    readonly LOG_INFO_COLOR=$(tput sgr 0)
-    readonly LOG_SUCCESS_COLOR=$(tput setaf 2)
-    readonly LOG_WARN_COLOR=$(tput setaf 3)
-    readonly LOG_DEBUG_COLOR=$(tput setaf 4)
+    LOG_DEFAULT_COLOR=$(tput sgr0)
+    LOG_ERROR_COLOR=$(tput setaf 1)
+    LOG_INFO_COLOR=$(tput sgr 0)
+    LOG_SUCCESS_COLOR=$(tput setaf 2)
+    LOG_WARN_COLOR=$(tput setaf 3)
+    LOG_DEBUG_COLOR=$(tput setaf 4)
 fi
 
 # This function scrubs the output of any control characters used in colorized output
@@ -79,20 +79,16 @@ log() {
     # Validate LOG_LEVEL_STDOUT and LOG_LEVEL_LOG since they'll be eval-ed.
     case $LOG_LEVEL_STDOUT in
         DEBUG|INFO|SUCCESS|WARNING|ERROR)
-            break
             ;;
         *)
             LOG_LEVEL_STDOUT=INFO
-            break
             ;;
     esac
     case $LOG_LEVEL_LOG in
         DEBUG|INFO|SUCCESS|WARNING|ERROR)
-            break
             ;;
         *)
             LOG_LEVEL_LOG=INFO
-            break
             ;;
     esac
 
