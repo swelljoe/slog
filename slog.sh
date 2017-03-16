@@ -24,7 +24,6 @@ SCRIPT_ARGS="$@"
 SCRIPT_NAME="$0"
 SCRIPT_NAME="${SCRIPT_NAME#\./}"
 SCRIPT_NAME="${SCRIPT_NAME##/*/}"
-SCRIPT_BASE_DIR="$(cd "$( dirname "$0")" && pwd )"
 
 # Determines if we print colors or not
 if [ $(tty -s) ]; then
@@ -53,13 +52,6 @@ else
     readonly LOG_DEBUG_COLOR=$(tput setaf 4)
 fi
 
-# Levels for comparing against LOG_LEVEL_STDOUT and LOG_LEVEL_LOG
-readonly LOG_LEVEL_DEBUG=0
-readonly LOG_LEVEL_INFO=1
-readonly LOG_LEVEL_SUCCESS=2
-readonly LOG_LEVEL_WARNING=3
-readonly LOG_LEVEL_ERROR=4
-
 # This function scrubs the output of any control characters used in colorized output
 # It's designed to be piped through with text that needs scrubbing.  The scrubbed
 # text will come out the other side!
@@ -72,6 +64,13 @@ log() {
     local log_text="$1"
     local log_level="$2"
     local log_color="$3"
+
+    # Levels for comparing against LOG_LEVEL_STDOUT and LOG_LEVEL_LOG
+    local LOG_LEVEL_DEBUG=0
+    local LOG_LEVEL_INFO=1
+    local LOG_LEVEL_SUCCESS=2
+    local LOG_LEVEL_WARNING=3
+    local LOG_LEVEL_ERROR=4
 
     # Default level to "info"
     [ -z ${log_level} ] && log_level="INFO";
