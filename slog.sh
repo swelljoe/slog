@@ -98,14 +98,14 @@ log() {
     eval log_level_stdout="\$LOG_LEVEL_${LOG_LEVEL_STDOUT}"
     if [ $log_level_stdout -le $log_level_int ]; then
         # STDOUT
-        printf "${log_color}[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text} ${LOG_DEFAULT_COLOR}\n";
+        printf "%s\n" "${log_color}[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text} ${LOG_DEFAULT_COLOR}";
     fi
     eval log_level_log="\$LOG_LEVEL_${LOG_LEVEL_LOG}"
     # Check LOG_LEVEL_LOG to see if this level of entry goes to LOG_PATH
     if [ $log_level_log -le $log_level_int ]; then
         # LOG_PATH minus fancypants colors
         if [ ! -z $LOG_PATH ]; then
-            printf "[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text}\n" >> $LOG_PATH;
+            printf "%s\n" "[$(date +"%Y-%m-%d %H:%M:%S %Z")] [${log_level}] ${log_text}" >> $LOG_PATH;
         fi
     fi
 
